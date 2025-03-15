@@ -4,7 +4,6 @@ if v:progname =~? "evim"
   finish
 endif
 
-
 " From defaults.vim and sensible.vim (comment from defaults.vim):
 " This must be first, because it changes other options as a side effect.
 " Avoid side effects when it was already reset.
