@@ -101,11 +101,14 @@ nmap <C-W>d
 
 map
 
-autocmd nvim_terminal
-autocmd nvim_cmdwin
-autocmd nvim_swapfile
-autocmd vimStartup
-autocmd vimHints
+let augroups = ['nvim_terminal', 'nvim_cmdwin', 'nvim_swapfile', 'vimStartup', 'vimHints']
+for augroup in augroups
+  if exists('#' . augroup)
+    exe 'autocmd ' . augroup
+  else
+    echo augroup . " augroup does not exist"
+  endif
+endfor
 
 echo "t_Co=" . &t_Co
 if exists('c_comment_strings')
