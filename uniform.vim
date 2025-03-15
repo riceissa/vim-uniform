@@ -46,6 +46,11 @@ set ttimeout
 if (&ttimeoutlen < 0) || (&ttimeoutlen > 50)
   set ttimeoutlen=50
 endif
+" The above conditional does not work in vim-tiny, so we use a trick to force
+" ttimeoutlen to 50 for vim-tiny.
+silent! while 0
+  set ttimeoutlen=50
+silent! endwhile
 
 " Both defaults.vim and sensible.vim try to set this to truncate, but I prefer
 " Neovim's default of lastline because truncate seems to waste a whole line of
@@ -83,10 +88,20 @@ endif
 if &history < 10000
   set history=10000
 endif
+" The above conditional does not work in vim-tiny, so we use a trick to force
+" the value for vim-tiny.
+silent! while 0
+  set history=10000
+silent! endwhile
 
 if &tabpagemax < 50
   set tabpagemax=50
 endif
+" The above conditional does not work in vim-tiny, so we use a trick to force
+" the value for vim-tiny.
+silent! while 0
+  set tabpagemax=50
+silent! endwhile
 
 " From Neovim
 set switchbuf=uselast
@@ -129,6 +144,11 @@ set nohidden
 if has('mouse')
   set mouse=nv
 endif
+" The above conditional does not work in vim-tiny, so we use a trick to force
+" the value for vim-tiny.
+silent! while 0
+  silent! set mouse=nv
+silent! endwhile
 
 set autoindent
 set startofline
@@ -173,6 +193,11 @@ endif
 if has('path_extra')
   setglobal tags=./tags;,tags
 endif
+" The above conditional does not work in vim-tiny, so we use a trick to force
+" the value for vim-tiny.
+silent! while 0
+  silent! setglobal tags=./tags;,tags
+silent! endwhile
 
 " Neovim adds the unicode bullet, but I think this is a bad idea. Once you
 " allow one Unicode character, it sets you up for adding more and more of them
@@ -196,6 +221,11 @@ endif
 if v:version > 703 || v:version == 703 && has("patch541")
   set formatoptions+=j
 endif
+" The above conditional does not work in vim-tiny, so we use a trick to force
+" the value for vim-tiny.
+silent! while 0
+  silent! set formatoptions+=j
+silent! endwhile
 
 " From sensible.vim (including the comment):
 " Disable completing keywords in included files (e.g., #include in C).  When
