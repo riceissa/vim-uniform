@@ -45,6 +45,7 @@ set incsearch?
 set isfname
 set joinspaces?
 set jumpoptions?
+set langmap?
 set langnoremap?
 set langremap?
 set laststatus?
@@ -103,8 +104,15 @@ map
 autocmd nvim_terminal
 autocmd nvim_cmdwin
 autocmd nvim_swapfile
+autocmd vimStartup
+autocmd vimHints
 
 echo "t_Co=" . &t_Co
+if exists('c_comment_strings')
+  echo "c_comment_strings = " . c_comment_strings
+else
+  echo "c_comment_strings does not exist"
+endif
 if exists('b:editorconfig')
   echo "editorconfig is enabled"
 else
