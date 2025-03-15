@@ -7,6 +7,10 @@ endif
 
 " From defaults.vim and sensible.vim
 set ruler
+if has('reltime')
+  set incsearch
+endif
+
 " From defaults.vim
 set showcmd
 
@@ -25,35 +29,44 @@ set wildoptions=pum,tagfile
 " From defaults.vim and sensible.vim
 set ttimeout
 " Both defaults.vim and sensible.vim use 100, but I prefer Neovim's default
-" value of 50
+" value of 50. This makes the escape key more responsive.
 if (&ttimeoutlen < 0) || (&ttimeoutlen > 50)
   set ttimeoutlen=50
 endif
 
 " Both defaults.vim and sensible.vim try to set this to truncate, but I prefer
-" Neovim's default of lastline
+" Neovim's default of lastline because truncate seems to waste a whole line of
+" space just to put the "@@@" marker at the left side of the screen.
 set display=lastline
 
 " Both defaults.vim and sensible.vim try to set this to a positive number, but
 " I prefer Neovim's default of 0
 set scrolloff=0
 
-" From defaults.vim and sensible.vim
-if has('reltime')
-  set incsearch
+" For consistency with scrolloff.
+set sidescrolloff=0
+
+" From sensible.vim (including the comment):
+" Allow color schemes to do bright colors without forcing bold.
+if &t_Co == 8 && $TERM !~# '^Eterm'
+  set t_Co=16
 endif
 
-
-" From defaults.vim: Do not recognize octal numbers for Ctrl-A and Ctrl-X,
-" most users find it confusing.
+" From defaults.vim (including the comment): Do not recognize octal numbers
+" for Ctrl-A and Ctrl-X, most users find it confusing.
 set nrformats-=octal
 
 " From sensible.vim. Break the undo sequence before CTRL-U and CTRL-W
-inoremap <C-U> <C-G>u<C-U>
-inoremap <C-W> <C-G>u<C-W>
+if empty(mapcheck('<C-U>', 'i'))
+  inoremap <C-U> <C-G>u<C-U>
+endif
+if empty(mapcheck('<C-W>', 'i'))
+  inoremap <C-W> <C-G>u<C-W>
+endif
 
 " Use Neovim's default of maximum history. There's no reason to keep any less
-" on a modern computer.
+" on a modern computer. The conditional is future-proofing in case the maximum
+" allowed value increases in the future.
 if &history < 10000
   set history=10000
 endif
@@ -108,6 +121,7 @@ nnoremap Y y$
 
 nnoremap & :&&<CR>
 
+" From Neovim (but sensible.vim) has something similar.
 nnoremap <C-L> <Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>
 
 " From Neovim
@@ -159,13 +173,13 @@ if !empty(&viminfo)
   set viminfo^=!
 endif
 
-" From sensible.vim:
+" From sensible.vim (including the comment):
 " Delete comment character when joining commented lines.
 if v:version > 703 || v:version == 703 && has("patch541")
   set formatoptions+=j
 endif
 
-" From sensible.vim:
+" From sensible.vim (including the comment):
 " Disable completing keywords in included files (e.g., #include in C).  When
 " configured properly, this can result in the slow, recursive scanning of
 " hundreds of files of dubious relevance.
@@ -179,19 +193,22 @@ if has('langmap') && exists('+langremap')
   set nolangremap
 endif
 
-" From sensible.vim:
+" From sensible.vim (including the comment):
 " Load matchit.vim, but only if the user hasn't installed a newer version.
 if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
   runtime! macros/matchit.vim
 endif
 
-" From sensible.vim:
+" From sensible.vim (including the comment):
 " Enable the :Man command shipped inside Vim's man filetype plugin.
 if exists(':Man') != 2 && !exists('g:loaded_man') && &filetype !=? 'man' && !has('nvim')
   runtime ftplugin/man.vim
 endif
 
-filetype plugin indent on
+" From sensible.vim:
+if !(exists('g:did_load_filetypes') && exists('g:did_load_ftplugin') && exists('g:did_indent_on'))
+  filetype plugin indent on
+endif
 if has('syntax') && !exists('g:syntax_on')
   syntax enable
 endif
@@ -239,4 +256,9 @@ augroup END
 if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
       \ | wincmd p | diffthis
+endif
+
+" Correctly highlight $() and other modern affordances in filetype=sh.
+if !exists('g:is_posix') && !exists('g:is_bash') && !exists('g:is_kornshell') && !exists('g:is_dash')
+  let g:is_posix = 1
 endif
