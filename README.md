@@ -33,3 +33,10 @@ Caveats:
   So the more extended claim is that if you source uniform.vim followed by
   commentary.vim followed by visual-star-search.vim, then the behavior of
   various Vim setups will be as close as possible.
+
+- Some Linux distributions come with their own Vim config files (e.g. Debian
+  comes with `debian.vim`). I'm mostly not going to worry about these. I think
+  some of these are a good idea (e.g. Git Bash on Windows comes with statusline
+  modifications to show the fileformat (unix, dos, etc.)) while others are a
+  bad idea (distros should not be changing settings like `ruler` now that
+  `defaults.vim` exists).
