@@ -91,13 +91,16 @@ endif
 " From Neovim
 set switchbuf=uselast
 
-" Check from
-" <https://github.com/tpope/vim-sensible/commit/38fea1c9356d46cc285f67c9f8e7bc3ba39fc0be>
-let s:use_unicode = !has('win32') && (&termencoding ==# 'utf-8' || &encoding ==# 'utf-8')
-if s:use_unicode
-  let &listchars = "tab:\u25b8 ,trail:\u00b7,extends:\u2192,precedes:\u2190,nbsp:\u00b7"
-else
-  set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+" Check to make this work on vim-tiny without errors (vim-tiny does not have
+" +eval).
+if 1
+  " Check from
+  " <https://github.com/tpope/vim-sensible/commit/38fea1c9356d46cc285f67c9f8e7bc3ba39fc0be>
+  let s:use_unicode = !has('win32') && (&termencoding ==# 'utf-8' || &encoding ==# 'utf-8')
+  if s:use_unicode
+    let &listchars = "tab:\u25b8 ,trail:\u00b7,extends:\u2192,precedes:\u2190,nbsp:\u00b7"
+  endif
 endif
 
 " Most searches are for navigation; some are to find something or all of
