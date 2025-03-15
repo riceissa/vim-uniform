@@ -158,7 +158,10 @@ nnoremap Y y$
 nnoremap & :&&<CR>
 
 " From Neovim (but sensible.vim) has something similar.
-nnoremap <C-L> <Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>
+" vim-tiny doesn't have nohlsearch so guard it with a conditional
+if exists(':nohlsearch') && exists(':diffupdate') && exists(':normal')
+  nnoremap <C-L> <Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>
+endif
 
 " From Neovim
 if exists('*reg_recorded')
