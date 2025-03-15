@@ -83,6 +83,17 @@ set nohlsearch
 set nojoinspaces
 set belloff=all
 
+" This is the Vim default
+if has('unix')
+  set path=.,/usr/include,,
+endif
+set define=^\\s*#\\s*define
+set include=^\\s*#\\s*include
+
+if executable('rg')
+  let &grepprg='rg --vimgrep -uu '
+endif
+
 " Might change this if it's too annoying
 set nohidden
 

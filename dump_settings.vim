@@ -46,7 +46,11 @@ set encoding?
 
 set formatoptions?
 set fsync?
-set grepprg
+
+" For some reason Neovim doesn't print the trailing whitespace, so we append a
+" visible character at the end to make the diff nicer.
+echo "grepprg=" . &grepprg . "|"
+
 set guicursor?
 set hidden?
 set history?
@@ -55,7 +59,12 @@ set include?
 set incsearch?
 set isfname
 set joinspaces?
-set jumpoptions?
+
+" I think Neovim's default of jumpoptions=clean makes the most sense. However,
+" Vim doesn't support it (yet). So there's no point in forcing consistency
+" here.
+" set jumpoptions?
+
 set langmap?
 set langnoremap?
 set langremap?
@@ -123,11 +132,6 @@ for augroup in augroups
 endfor
 
 echo "t_Co=" . &t_Co
-if exists('c_comment_strings')
-  echo "c_comment_strings = " . c_comment_strings
-else
-  echo "c_comment_strings does not exist"
-endif
 if exists('b:editorconfig') || exists('g:loaded_EditorConfig')
   echo "editorconfig is enabled"
 else
@@ -167,6 +171,17 @@ endfunction
 
 redir @a
 silent call Out()
+
+" I have no idea why, but c_comment_strings is not visible inside of a
+" function (some kind of scope problem, I think, where functions can only
+" access g:-prefixed variables from the outside?), so we gotta run it out
+" here.
+if exists('c_comment_strings')
+  echo "c_comment_strings = " . c_comment_strings
+else
+  echo "c_comment_strings does not exist"
+endif
+
 redir END
 put a
 
