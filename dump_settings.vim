@@ -110,7 +110,8 @@ nmap [d
 nmap ]d
 nmap <C-W>d
 
-map
+" This will show all defined maps, but includes a lot of potentially junk.
+" map
 
 let augroups = ['nvim_terminal', 'nvim_cmdwin', 'nvim_swapfile', 'vimStartup', 'vimHints']
 for augroup in augroups
@@ -127,7 +128,7 @@ if exists('c_comment_strings')
 else
   echo "c_comment_strings does not exist"
 endif
-if exists('b:editorconfig')
+if exists('b:editorconfig') || exists('g:loaded_EditorConfig')
   echo "editorconfig is enabled"
 else
   echo "editorconfig is disabled"

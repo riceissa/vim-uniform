@@ -99,6 +99,10 @@ nnoremap & :&&<CR>
 
 nnoremap <C-L> <Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>
 
+" From Neovim
+xnoremap <expr> Q mode() ==# 'V' ? ':normal! @<C-R>=reg_recorded()<CR><CR>' : 'Q'
+xnoremap <expr> @ mode() ==# 'V' ? ':normal! @'.getcharstr().'<CR>' : '@'
+
 " By default, Vim sets the swap directory to the same directory as the file
 " being edited, which is a security risk when editing files on a server (e.g.
 " if one is editing a MediaWiki LocalSettings.php file on a server, then
@@ -179,4 +183,49 @@ endif
 filetype plugin indent on
 if has('syntax') && !exists('g:syntax_on')
   syntax enable
+endif
+
+if !has('nvim')
+  silent! packadd editorconfig
+endif
+
+" Modified from defaults.vim:
+augroup vimStartup
+  autocmd!
+  " When editing a file, always jump to the last known cursor position.
+  " Don't do it when the position is invalid, when inside an event handler
+  " (happens when dropping a file on gvim), for a commit or rebase message
+  " (likely a different one than last time), and when using xxd(1) to filter
+  " and edit binary files (it transforms input files back and forth, causing
+  " them to have dual nature, so to speak) or when running the new tutor
+  autocmd BufReadPost *
+    \ let line = line("'\"")
+    \ | if line >= 1 && line <= line("$") && &filetype !~# 'commit'
+    \      && index(['xxd', 'gitrebase', 'tutor'], &filetype) == -1
+    \ |   execute "normal! g`\""
+    \ | endif
+augroup END
+
+" Modified from defaults.vim:
+" Quite a few people accidentally type "q:" instead of ":q" and get confused
+" by the command line window.  Give a hint about how to get out.
+" If you don't like this you can put this in your vimrc:
+" ":autocmd! vimHints"
+augroup vimHints
+  au!
+  autocmd CmdwinEnter *
+  \ echohl Todo |
+  \ echo gettext('You discovered the command-line window! You can close it with ":q".') |
+  \ echohl None
+augroup END
+
+" Modified from defaults.vim:
+" Convenient command to see the difference between the current buffer and the
+" file it was loaded from, thus the changes you made.
+" Only define it when not defined already.
+" Revert with: ":delcommand DiffOrig".
+" See :help :DiffOrig for more information.
+if !exists(":DiffOrig")
+  command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
+      \ | wincmd p | diffthis
 endif
