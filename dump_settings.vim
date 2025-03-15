@@ -15,7 +15,13 @@ colorscheme
 " See :help nvim-defaults for a list
 set autoindent?
 set autoread?
-set background?
+
+" Both Vim and Neovim try to detect the terminal background color, but I think
+" they do so in different ways because they differ by default. It makes no
+" sense to pick one or the other, and I don't think there is a way to reliably
+" detect the color, so I'm just going to leave this one to the vimrc.
+" set background?
+
 set backspace?
 set backupdir?
 set belloff?
@@ -26,13 +32,18 @@ set complete?
 if exists('+cscopeverbose')
   set cscopeverbose?
 else
-  echo "Does not have cscopeverbose support"
+  echo "nocscopeverbose"
 endif
 set define?
 set directory?
 set display?
 set encoding?
-set fillchars?
+
+" This option differs, but it's a visual difference and I don't really feel
+" like adding the Unicode fillchars to the Vim version, so I think I'm just
+" going to leave it alone.
+" set fillchars?
+
 set formatoptions?
 set fsync?
 set grepprg
@@ -79,7 +90,7 @@ set ttimeoutlen?
 set ttyfast?
 set undodir?
 set viewoptions?
-set viminfo?
+echo "viminfo/shada=" . &viminfo
 set wildmenu?
 set wildoptions?
 

@@ -137,6 +137,25 @@ set shortmess=filnxtToOSC
 set commentstring=
 set sidescroll=1
 
+" From sensible.vim (Neovim also has this by default, but logic and comment
+" are from sensible.vim):
+" Persist g:UPPERCASE variables, used by some plugins, in .viminfo.
+if !empty(&viminfo)
+  set viminfo^=!
+endif
+
+" From sensible.vim:
+" Delete comment character when joining commented lines.
+if v:version > 703 || v:version == 703 && has("patch541")
+  set formatoptions+=j
+endif
+
+" From sensible.vim:
+" Disable completing keywords in included files (e.g., #include in C).  When
+" configured properly, this can result in the slow, recursive scanning of
+" hundreds of files of dubious relevance.
+set complete-=i
+
 " From defaults.vim
 if has('langmap') && exists('+langremap')
   " Prevent that the langmap option applies to characters that result from a
