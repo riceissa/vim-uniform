@@ -145,6 +145,18 @@ if has('langmap') && exists('+langremap')
   set nolangremap
 endif
 
+" From sensible.vim:
+" Load matchit.vim, but only if the user hasn't installed a newer version.
+if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
+  runtime! macros/matchit.vim
+endif
+
+" From sensible.vim:
+" Enable the :Man command shipped inside Vim's man filetype plugin.
+if exists(':Man') != 2 && !exists('g:loaded_man') && &filetype !=? 'man' && !has('nvim')
+  runtime ftplugin/man.vim
+endif
+
 filetype plugin indent on
 if has('syntax') && !exists('g:syntax_on')
   syntax enable
