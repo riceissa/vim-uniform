@@ -90,6 +90,7 @@ else
   echo 'Does not have smoothscroll support'
 endif
 set startofline?
+set suffixes?
 set switchbuf?
 set tabpagemax?
 set tags?

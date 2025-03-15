@@ -138,7 +138,9 @@ nnoremap & :&&<CR>
 nnoremap <C-L> <Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>
 
 " From Neovim
-xnoremap <expr> Q mode() ==# 'V' ? ':normal! @<C-R>=reg_recorded()<CR><CR>' : 'Q'
+if exists('*reg_recorded')
+  xnoremap <expr> Q mode() ==# 'V' ? ':normal! @<C-R>=reg_recorded()<CR><CR>' : 'Q'
+endif
 xnoremap <expr> @ mode() ==# 'V' ? ':normal! @'.getcharstr().'<CR>' : '@'
 
 " By default, Vim sets the swap directory to the same directory as the file
@@ -274,5 +276,8 @@ if 1
       \ | endif
   augroup END
 
-  autocmd! vimHints
+  " Reset this augroup because I don't want the hint to show up every time.
+  augroup vimHints
+    autocmd!
+  augroup END
 endif
