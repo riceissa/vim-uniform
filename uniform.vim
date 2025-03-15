@@ -1,9 +1,23 @@
-" From defaults.vim and sensible.vim
+" From defaults.vim (including comment):
+" When started as "evim", evim.vim will already have done these settings.
+if v:progname =~? "evim"
+  finish
+endif
+
+
+" From defaults.vim and sensible.vim (comment from defaults.vim):
 " This must be first, because it changes other options as a side effect.
 " Avoid side effects when it was already reset.
 if &compatible
   set nocompatible
 endif
+
+" From defaults.vim (including comment):
+" When the +eval feature is missing, the set command above will be skipped.
+" Use a trick to reset compatible only when the +eval feature is missing.
+silent! while 0
+  set nocompatible
+silent! endwhile
 
 " From defaults.vim and sensible.vim
 set ruler
@@ -40,7 +54,7 @@ endif
 set display=lastline
 
 " Both defaults.vim and sensible.vim try to set this to a positive number, but
-" I prefer Neovim's default of 0
+" I prefer Neovim's default of 0.
 set scrolloff=0
 
 " For consistency with scrolloff.
@@ -137,7 +151,7 @@ xnoremap <expr> @ mode() ==# 'V' ? ':normal! @'.getcharstr().'<CR>' : '@'
 " doesn't turn on backups by default so this is only a problem if one enables
 " that setting). I think the same is true for undodir, but I haven't looked
 " into it.
-if !has('win64')
+if !(has('win64') || has('win32'))
   if !isdirectory(expand('~/.vim/backup'))
     call mkdir(expand('~/.vim/backup'), 'p')
   endif
@@ -205,47 +219,12 @@ if exists(':Man') != 2 && !exists('g:loaded_man') && &filetype !=? 'man' && !has
   runtime ftplugin/man.vim
 endif
 
-" From sensible.vim:
-if !(exists('g:did_load_filetypes') && exists('g:did_load_ftplugin') && exists('g:did_indent_on'))
-  filetype plugin indent on
-endif
-if has('syntax') && !exists('g:syntax_on')
-  syntax enable
-endif
 
 if !has('nvim')
   silent! packadd editorconfig
 endif
 
-" Modified from defaults.vim:
-augroup vimStartup
-  autocmd!
-  " When editing a file, always jump to the last known cursor position.
-  " Don't do it when the position is invalid, when inside an event handler
-  " (happens when dropping a file on gvim), for a commit or rebase message
-  " (likely a different one than last time), and when using xxd(1) to filter
-  " and edit binary files (it transforms input files back and forth, causing
-  " them to have dual nature, so to speak) or when running the new tutor
-  autocmd BufReadPost *
-    \ let line = line("'\"")
-    \ | if line >= 1 && line <= line("$") && &filetype !~# 'commit'
-    \      && index(['xxd', 'gitrebase', 'tutor'], &filetype) == -1
-    \ |   execute "normal! g`\""
-    \ | endif
-augroup END
 
-" Modified from defaults.vim:
-" Quite a few people accidentally type "q:" instead of ":q" and get confused
-" by the command line window.  Give a hint about how to get out.
-" If you don't like this you can put this in your vimrc:
-" ":autocmd! vimHints"
-augroup vimHints
-  au!
-  autocmd CmdwinEnter *
-  \ echohl Todo |
-  \ echo gettext('You discovered the command-line window! You can close it with ":q".') |
-  \ echohl None
-augroup END
 
 " Modified from defaults.vim:
 " Convenient command to see the difference between the current buffer and the
@@ -255,10 +234,46 @@ augroup END
 " See :help :DiffOrig for more information.
 if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
-      \ | wincmd p | diffthis
+                  \ | wincmd p | diffthis
 endif
 
 " Correctly highlight $() and other modern affordances in filetype=sh.
 if !exists('g:is_posix') && !exists('g:is_bash') && !exists('g:is_kornshell') && !exists('g:is_dash')
   let g:is_posix = 1
+endif
+
+" From defaults.vim; highlights strings inside C comments.
+if &t_Co > 2 || has("gui_running")
+  let c_comment_strings=1
+endif
+
+" Comment and "if 1" check from defaults.vim.
+" Only do this part when Vim was compiled with the +eval feature.
+if 1
+  " From sensible.vim:
+  if !(exists('g:did_load_filetypes') && exists('g:did_load_ftplugin') && exists('g:did_indent_on'))
+    filetype plugin indent on
+  endif
+  if has('syntax') && !exists('g:syntax_on')
+    syntax enable
+  endif
+
+  " Modified from defaults.vim:
+  augroup vimStartup
+    autocmd!
+    " When editing a file, always jump to the last known cursor position.
+    " Don't do it when the position is invalid, when inside an event handler
+    " (happens when dropping a file on gvim), for a commit or rebase message
+    " (likely a different one than last time), and when using xxd(1) to filter
+    " and edit binary files (it transforms input files back and forth, causing
+    " them to have dual nature, so to speak) or when running the new tutor
+    autocmd BufReadPost *
+      \ let line = line("'\"")
+      \ | if line >= 1 && line <= line("$") && &filetype !~# 'commit'
+      \      && index(['xxd', 'gitrebase', 'tutor'], &filetype) == -1
+      \ |   execute "normal! g`\""
+      \ | endif
+  augroup END
+
+  autocmd! vimHints
 endif
