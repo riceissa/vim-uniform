@@ -4,6 +4,7 @@ The goal of uniform.vim is to set any option that stock Vim, Neovim,
 sensible.vim, and defaults.vim might disagree on. So no matter which of
 Vim/Neovim you use, and whether you sourced [sensible.vim](https://github.com/tpope/vim-sensible) or [defaults.vim](https://github.com/vim/vim/blob/master/runtime/defaults.vim), your
 Vim should behave the same.
+It can be thought of as an analogue to [Normalize.css](https://necolas.github.io/normalize.css/).
 
 Caveats:
 
