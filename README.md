@@ -6,7 +6,26 @@ Vim/Neovim you use, and whether you sourced [sensible.vim](https://github.com/tp
 Vim should behave the same.
 It can be thought of as an analogue to [Normalize.css](https://necolas.github.io/normalize.css/).
 
-Caveats:
+## Installation
+
+Install using your favorite package manager. For example, with vim-plug:
+
+```vim
+Plug 'riceissa/vim-uniform'
+```
+
+Or you can use Vim's built-in package support:
+
+```bash
+mkdir -p ~/.vim/pack/riceissa/start
+cd ~/.vim/pack/riceissa/start
+git clone https://github.com/riceissa/vim-uniform.git
+# Might add documentation later, but for now there are now, so no need to run
+# this final step:
+# vim -u NONE -c "helptags vim-uniform/doc" -c q
+```
+
+## Caveats
 
 - There are some options that I'm deliberately not touching; see the comments
   in `dump_settings.vim` for more information.
