@@ -8,6 +8,17 @@ sourced sensible.vim or defaults.vim, your Vim should behave the same. You can
 think of it as an analog of
 [Normalize.css](https://necolas.github.io/normalize.css/).
 
+I made this plugin because I use multiple copies of Vim/Neovim on a daily
+basis: inside of WSL I use Neovim as my main editor, but to develop stuff on
+Windows I use Vim inside of Git Bash, and sometimes I open random files from
+Windows Explorer, which opens in `nvim-qt`. Even though I was using the same
+vimrc with the same plugins, these different copies of Vim still have subtly
+different behavior (there's the Vim vs Neovim difference, but then also Git
+Bash bundles its own `/etc/vimrc` file, and the Neovim versions inside of WSL
+might not match that of `nvim-qt`) -- not enough to make things unusable, but
+enough that I had some subtle frustration every time I encountered a small
+difference.
+
 ## Installation
 
 Install using your favorite package manager. For example, with vim-plug:
