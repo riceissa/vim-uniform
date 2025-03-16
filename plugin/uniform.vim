@@ -134,8 +134,11 @@ endif
 set define=^\\s*#\\s*define
 set include=^\\s*#\\s*include
 
+" Neovim uses 'rg --vimgrep -uu ' but I see no reason why I would ever want to
+" search inside of directories like .git; ripgrep's smart filtering is there
+" by default for a reason.
 if executable('rg')
-  let &grepprg='rg --vimgrep -uu '
+  let &grepprg='rg --vimgrep '
 endif
 
 " Might change this if it's too annoying
@@ -243,6 +246,14 @@ if has('langmap') && exists('+langremap')
   " compatible).
   set nolangremap
 endif
+
+" In Git Bash, the jump from showmatch pauses text insertion so some
+" characters get lost if I type too quickly. It turns out in Git Bash the file
+" /etc/vimrc is read, which turns on showmatch. I am turning off visualbell as
+" well because I find it really annoying and for some reason Git Bash's
+" /etc/vimrc sets that.
+set noshowmatch
+set novisualbell
 
 " From sensible.vim (including the comment):
 " Load matchit.vim, but only if the user hasn't installed a newer version.
