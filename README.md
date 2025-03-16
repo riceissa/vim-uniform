@@ -41,8 +41,9 @@ git clone https://github.com/riceissa/vim-uniform.git
 - I resolve the disagreements by setting the options to whatever I happen to
   prefer. You will probably disagree with me on at least some of the options.
   You can either use uniform.vim directly and then override the options you
-  want to change, or you can just copy uniform.vim and use it as a template,
-  and change stuff you want to change.
+  want to change in your vimrc, or you can just fork uniform.vim and use it as
+  a template, and change stuff you want to change directly within your copy of
+  uniform.vim.
 
 - Some of the things that Neovim includes by default (in particular,
   commenting stuff with `gc` (see `:help gc-default`) and visual star (see
