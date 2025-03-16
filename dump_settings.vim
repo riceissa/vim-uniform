@@ -121,7 +121,12 @@ imap <C-U>
 imap <C-W>
 nmap <C-L>
 nmap &
-xmap Q
+
+" Vim doesn't seem to have a reg_recorded() function, so there is no way to
+" query for the last recorded macro. This means Neovim's default mapping
+" cannot be done in Vim.
+" xmap Q
+
 xmap @
 xmap #
 xmap *
@@ -167,16 +172,27 @@ else
   echo "is_posix: does not exist"
 endif
 
-if maparg('Q', 'n') ==# ''
-  if has('nvim')
-    echo "Q replays the last recorded macro"
-    echo "gQ switches to Ex mode"
-  else
-    echo "Q switches to Ex mode"
-  endif
-else
-  nmap Q
-endif
+" I like Neovim's behavior better, but there is no way to get it in Vim since
+" as I wrote above, Vim doesn't have a reg_recorded() function. So I'm
+" commenting this stuff out as unfixable.
+" if maparg('Q', 'n') ==# ''
+"   if has('nvim')
+"     echo "Q replays the last recorded macro"
+"   else
+"     echo "Q switches to Ex mode with some slight modifications"
+"   endif
+" else
+"   nmap Q
+" endif
+" if maparg('gQ', 'n') ==# ''
+"   if has('nvim')
+"     echo "gQ switches to Ex mode"
+"   else
+"     echo "gQ switches to Ex mode"
+"   endif
+" else
+"   nmap gQ
+" endif
 
 command DiffOrig
 
@@ -185,7 +201,7 @@ endfunction
 redir @a
 silent call Out()
 
-" I have no idea why, but c_comment_strings is not visible inside of a
+" I don't know exactly why, but c_comment_strings is not visible inside of a
 " function (some kind of scope problem, I think, where functions can only
 " access g:-prefixed variables from the outside?), so we gotta run it out
 " here.
