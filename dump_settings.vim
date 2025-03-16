@@ -57,7 +57,11 @@ set hidden?
 set history?
 set hlsearch?
 set ignorecase?
-set inccommand?
+if exists('+inccommand')
+  set inccommand?
+else
+  echo "noinccommand"
+endif
 set include?
 set incsearch?
 set isfname
