@@ -57,11 +57,14 @@ set hidden?
 set history?
 set hlsearch?
 set ignorecase?
-if exists('+inccommand')
-  set inccommand?
-else
-  echo "noinccommand"
-endif
+
+" Vim has no inccommand option, so commenting this out as unfixable.
+" if exists('+inccommand')
+"   set inccommand?
+" else
+"   echo "noinccommand"
+" endif
+
 set include?
 set incsearch?
 set isfname
@@ -133,14 +136,18 @@ xmap *
 nmap gc
 xmap gc
 nmap gcc
-nmap [d
-nmap ]d
-nmap <C-W>d
+
+" I'm not even sure what a 'diagnostic' is (the docs never explain it; see
+" :help ]d-default in nvim), so I'm commenting this stuff out for now.
+" nmap [d
+" nmap ]d
+" nmap <C-W>d
 
 " This will show all defined maps, but includes a lot of potentially junk.
 " map
 
-let augroups = ['nvim_terminal', 'nvim_cmdwin', 'nvim_swapfile', 'vimStartup', 'vimHints']
+" let augroups = ['nvim_terminal', 'nvim_cmdwin', 'nvim_swapfile', 'vimStartup', 'vimHints']
+let augroups = ['vimStartup', 'vimHints']
 for augroup in augroups
   if exists('#' . augroup)
     exe 'autocmd ' . augroup
