@@ -211,9 +211,21 @@ silent! endwhile
 set comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
 
 set mousemodel=popup_setpos
+
+" TODO: look through each letter more carefully. I made one mistake where I
+" really like seeing the count messages when searching, but I had put S in
+" here.
 set shortmess=filnxtToOC
+
 set commentstring=
 set sidescroll=1
+
+" From debian.vim: "modelines have historically been a source of
+" security/resource vulnerabilities -- disable by default, even when
+" 'nocompatible' is set". Also, I feel modelines were mainly useful back
+" before EditorConfig was a thing, but now we have EditorConfig which I think
+" solves the same problem in a better way.
+set nomodeline
 
 " From sensible.vim (Neovim also has this by default, but logic and comment
 " are from sensible.vim):
