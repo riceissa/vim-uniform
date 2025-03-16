@@ -279,6 +279,9 @@ endif
 " /etc/vimrc sets that.
 set noshowmatch
 set novisualbell
+" Newer versions of Git Bash also set this option to something awful, so reset
+" it to the Vim/Neovim default.
+set wildmode=full
 
 " From sensible.vim (including the comment):
 " Load matchit.vim, but only if the user hasn't installed a newer version.
