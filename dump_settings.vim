@@ -51,6 +51,7 @@ set fsync?
 " For some reason Neovim doesn't print the trailing whitespace, so we append a
 " visible character at the end to make the diff nicer.
 echo "grepprg=" . &grepprg . "|"
+set grepformat?
 
 set guicursor?
 set hidden?
