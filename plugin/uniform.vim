@@ -220,7 +220,8 @@ set mousemodel=popup_setpos
 " TODO: look through each letter more carefully. I made one mistake where I
 " really like seeing the count messages when searching, but I had put S in
 " here.
-if has('nvim') || v:version >= 901
+" See Patch 9.0.0738 https://vimhelp.org/version9.txt.html for "C"
+if has('nvim') || v:version > 900 || (v:version == 900 && has("patch738"))
   set shortmess=filnxtToOC
 else
   set shortmess=filnxtToO
