@@ -144,6 +144,7 @@ set include=^\\s*#\\s*include
 " by default for a reason.
 if executable('rg')
   let &grepprg='rg --vimgrep '
+  set grepformat=%f:%l:%c:%m
 endif
 
 " Might change this if it's too annoying
