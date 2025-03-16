@@ -254,8 +254,7 @@ endif
 " Enable the :Man command shipped inside Vim's man filetype plugin.
 if exists(':Man') != 2 && !exists('g:loaded_man') && &filetype !=? 'man' && !has('nvim')
   runtime ftplugin/man.vim
-  " TODO maybe add:
-  " setglobal keywordprg=:Man
+  setglobal keywordprg=:Man
 endif
 
 if !has('nvim')
