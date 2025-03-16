@@ -38,6 +38,7 @@ set define?
 set directory?
 set display?
 set encoding?
+set equalalways?
 
 " This option differs, but it's a visual difference and I don't really feel
 " like adding the Unicode fillchars to the Vim version, so I think I'm just
@@ -55,6 +56,8 @@ set guicursor?
 set hidden?
 set history?
 set hlsearch?
+set ignorecase?
+set inccommand?
 set include?
 set incsearch?
 set isfname
@@ -65,11 +68,14 @@ set joinspaces?
 " here.
 " set jumpoptions?
 
+set keywordprg?
 set langmap?
 set langnoremap?
 set langremap?
 set laststatus?
+set list?
 set listchars?
+set modeline?
 set mouse?
 set mousemodel?
 set nocompatible?
@@ -83,12 +89,14 @@ set shortmess?
 set showcmd?
 set sidescroll?
 set sidescrolloff?
+set smartcase?
 set smarttab?
 if exists('+smoothscroll')
   set smoothscroll?
 else
   echo 'Does not have smoothscroll support'
 endif
+set spellfile?
 set startofline?
 set suffixes?
 set switchbuf?
