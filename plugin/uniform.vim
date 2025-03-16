@@ -208,7 +208,7 @@ silent! endwhile
 set comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
 
 set mousemodel=popup_setpos
-set shortmess=filnxtToOSC
+set shortmess=filnxtToOC
 set commentstring=
 set sidescroll=1
 
@@ -254,14 +254,13 @@ endif
 " Enable the :Man command shipped inside Vim's man filetype plugin.
 if exists(':Man') != 2 && !exists('g:loaded_man') && &filetype !=? 'man' && !has('nvim')
   runtime ftplugin/man.vim
+  " TODO maybe add:
+  " setglobal keywordprg=:Man
 endif
-
 
 if !has('nvim')
   silent! packadd editorconfig
 endif
-
-
 
 " Modified from defaults.vim:
 " Convenient command to see the difference between the current buffer and the
