@@ -37,7 +37,12 @@ set sessionoptions-=options
 set viewoptions-=options
 
 " From Neovim
-set wildoptions=pum,tagfile
+if has('nvim') || v:version >= 900
+  set wildoptions=pum,tagfile
+endif
+silent! while 0
+  silent! set wildoptions=pum,tagfile
+silent! endwhile
 
 " From defaults.vim and sensible.vim
 set ttimeout
@@ -215,7 +220,14 @@ set mousemodel=popup_setpos
 " TODO: look through each letter more carefully. I made one mistake where I
 " really like seeing the count messages when searching, but I had put S in
 " here.
-set shortmess=filnxtToOC
+if has('nvim') || v:version >= 901
+  set shortmess=filnxtToOC
+else
+  set shortmess=filnxtToO
+endif
+silent! while 0
+  silent! set shortmess=filnxtToOC
+silent! endwhile
 
 set commentstring=
 set sidescroll=1
