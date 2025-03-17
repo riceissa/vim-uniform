@@ -33,7 +33,7 @@ Or you can use Vim's built-in package support:
 mkdir -p ~/.vim/pack/riceissa/start
 cd ~/.vim/pack/riceissa/start
 git clone https://github.com/riceissa/vim-uniform.git
-# Might add documentation later, but for now there are now, so no need to run
+# Might add documentation later, but for now there are none, so no need to run
 # this final step:
 # vim -u NONE -c "helptags vim-uniform/doc" -c q
 ```
