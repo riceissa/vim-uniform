@@ -239,7 +239,12 @@ set sidescroll=1
 " 'nocompatible' is set". Also, I feel modelines were mainly useful back
 " before EditorConfig was a thing, but now we have EditorConfig which I think
 " solves the same problem in a better way.
-set nomodeline
+" set nomodeline
+" However, on Windows, nvim-qt can't detect the filetype of Vim help pages
+" (which have a .txt extension) for some reason (despite having the same
+" version as the Nvim on my WSL), so I'm going to leave modeline on for now,
+" and hope that this gets fixed in the future.
+set modeline
 
 " From sensible.vim (Neovim also has this by default, but logic and comment
 " are from sensible.vim):
