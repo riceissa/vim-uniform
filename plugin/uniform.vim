@@ -147,8 +147,12 @@ if executable('rg')
   set grepformat=%f:%l:%c:%m
 endif
 
-" Might change this if it's too annoying
-set nohidden
+" I like that nohidden forces you to always save your buffers before making
+" them invisible, but nohidden also forgets the undo history when the buffer
+" becomes invisible, which is a huge pain (maybe there's a way to get
+" persistent history without hidden, but I think this shows that hidden does
+" something useful, so I'm keeping it).
+set hidden
 
 if has('mouse')
   set mouse=nv
