@@ -68,9 +68,11 @@ git clone https://github.com/riceissa/vim-uniform.git
   various Vim setups will be as close as possible.
 
 - Some Linux distributions come with their own Vim config files (e.g. Debian
-  comes with `debian.vim`). I'm mostly not going to worry about these. I think
+  comes with `debian.vim`, and Git Bash bundles its own `/etc/vimrc` file).
+  I'm mostly not going to worry about these. I think
   some of these are a good idea (e.g. Git Bash on Windows comes with statusline
   modifications to show the fileformat (unix, dos, etc.), which really is
   useful on Git Bash since one could be dealing with both types of fileformats)
   while others are a bad idea (distros should not be changing settings like
-  `ruler` now that defaults.vim exists).
+  `ruler` now that defaults.vim exists, and settings like `visualbell` are
+  a personal preference that distros should not be messing with).
