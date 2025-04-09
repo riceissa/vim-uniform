@@ -326,9 +326,12 @@ if !exists('g:is_posix') && !exists('g:is_bash') && !exists('g:is_kornshell') &&
   let g:is_posix = 1
 endif
 
-" From defaults.vim; highlights strings inside C comments.
+" defaults.vim sets c_comment_strings=1 to highlight strings (and numerical
+" constants?) inside C comments. It turns out I don't really like this (it is
+" kind of distracting to have random bits of stuff be a different color in
+" comments), so turn it off.
 if &t_Co > 2 || has("gui_running")
-  let c_comment_strings=1
+  let c_comment_strings=0
 endif
 
 " Comment and "if 1" check from defaults.vim.
