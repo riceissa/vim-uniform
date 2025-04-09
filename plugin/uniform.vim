@@ -330,9 +330,7 @@ endif
 " constants?) inside C comments. It turns out I don't really like this (it is
 " kind of distracting to have random bits of stuff be a different color in
 " comments), so turn it off.
-if &t_Co > 2 || has("gui_running")
-  let c_comment_strings=0
-endif
+unlet! c_comment_strings
 
 " Comment and "if 1" check from defaults.vim.
 " Only do this part when Vim was compiled with the +eval feature.
