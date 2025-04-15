@@ -292,6 +292,9 @@ set novisualbell
 " Newer versions of Git Bash also set this option to something awful, so reset
 " it to the Vim/Neovim default.
 set wildmode=full
+" Git Bash's /etc/vimrc sets this to unnamed, which I don't like, so reset it
+" to the Vim/Neovim default.
+set clipboard=
 
 " From sensible.vim (including the comment):
 " Load matchit.vim, but only if the user hasn't installed a newer version.
