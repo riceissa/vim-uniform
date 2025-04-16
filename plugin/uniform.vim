@@ -232,6 +232,13 @@ else
   set shortmess=filnxtToO
 endif
 silent! while 0
+  " Set the option twice, once without the C flag for older Vim versions, and
+  " once with the C flag for newer Vim versions. If the C flag exists, then
+  " both lines will run, and the second line will be kept. If the C flag
+  " doesn't exist, then the first line will run, and the second line will
+  " silently fail, so the first line will be used. This essentially imitates
+  " the if-else above but doesn't require the +eval feature.
+  silent! set shortmess=filnxtToO
   silent! set shortmess=filnxtToOC
 silent! endwhile
 
