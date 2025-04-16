@@ -76,3 +76,22 @@ git clone https://github.com/riceissa/vim-uniform.git
   while others are a bad idea (distros should not be changing settings like
   `ruler` now that defaults.vim exists, and settings like `visualbell` are
   a personal preference that distros should not be messing with).
+
+## License
+
+uniform.vim liberally copies from defaults.vim and sensible.vim, so it should
+probably be considered a derivative. Both defaults.vim and sensible.vim are
+licensed under the Vim License, which you can find
+[here](https://github.com/vim/vim/blob/master/LICENSE).
+
+The license text for sensible.vim is:
+
+```
+## License
+
+Copyright © Tim Pope.  Distributed under the same terms as Vim itself.
+See `:help license`.
+```
+
+All other files in this repo besides `plugin/uniform.vim` are my own work, and
+you can consider them public domain.
