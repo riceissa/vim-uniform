@@ -1,3 +1,9 @@
+if exists('g:loaded_uniform')
+  finish
+else
+  let g:loaded_uniform = 'yes'
+endif
+
 " From defaults.vim (including comment):
 " When started as "evim", evim.vim will already have done these settings.
 if v:progname =~? "evim"
