@@ -35,6 +35,7 @@ else
   echo "nocscopeverbose"
 endif
 set define?
+set diffopt?
 set directory?
 set display?
 set encoding?
@@ -137,6 +138,47 @@ xmap *
 nmap gc
 xmap gc
 nmap gcc
+
+nmap grn
+nmap grr
+nmap gri
+nmap gO
+nmap gra
+imap <C-S>
+smap <C-S>
+
+nmap [q
+nmap ]q
+nmap [Q
+nmap ]Q
+nmap [<C-Q>
+nmap ]<C-Q>
+nmap [l
+nmap ]l
+nmap [L
+nmap ]L
+nmap [<C-L>
+nmap ]<C-L>
+nmap [t
+nmap ]t
+nmap [T
+nmap ]T
+nmap [<C-T>
+nmap ]<C-T>
+nmap [a
+nmap ]a
+nmap [A
+nmap ]A
+nmap [b
+nmap ]b
+nmap [B
+nmap ]B
+nmap [<Space>
+nmap ]<Space>
+nmap [[
+nmap ]]
+nmap <Tab>
+nmap <S-Tab>
 
 " I'm not even sure what a 'diagnostic' is (the docs never explain it; see
 " :help ]d-default in nvim), so I'm commenting this stuff out for now.
