@@ -38,6 +38,24 @@ git clone https://github.com/riceissa/vim-uniform.git
 # vim -u NONE -c "helptags vim-uniform/doc" -c q
 ```
 
+If you would like to override some of the options set in uniform.vim, you can
+add this near the beginning of your vimrc, and then put your overridden options
+after this line:
+
+```vim
+" Force uniform.vim to be sourced right now, instead of after vimrc is sourced
+runtime! pack/riceissa/start/vim-uniform/plugin/uniform.vim
+```
+
+Of course, if your package manager puts uniform.vim in a different location
+and/or manages the runtime path for you, you will have to use that location
+instead of `pack/riceissa/start/vim-uniform/plugin/uniform.vim`. For example,
+if you use vim-plug you would do:
+
+```vim
+runtime! plugin/uniform.vim
+```
+
 ## Caveats
 
 - There are some options that I'm deliberately not touching; see the comments
