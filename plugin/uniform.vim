@@ -114,8 +114,8 @@ silent! while 0
   set tabpagemax=50
 silent! endwhile
 
-" From Neovim
-set switchbuf=uselast
+" From Neovim. Set silently so that it works for old Neovim versions.
+silent! set switchbuf=uselast
 
 set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
 " Check to make this work on vim-tiny without errors (vim-tiny does not have
@@ -231,22 +231,12 @@ set mousemodel=popup_setpos
 " TODO: look through each letter more carefully. I made one mistake where I
 " really like seeing the count messages when searching, but I had put S in
 " here.
-" See Patch 9.0.0738 https://vimhelp.org/version9.txt.html for "C"
-if has('nvim') || v:version > 900 || (v:version == 900 && has("patch738"))
-  set shortmess=filnxtToOC
-else
-  set shortmess=filnxtToO
-endif
-silent! while 0
-  " Set the option twice, once without the C flag for older Vim versions, and
-  " once with the C flag for newer Vim versions. If the C flag exists, then
-  " both lines will run, and the second line will be kept. If the C flag
-  " doesn't exist, then the first line will run, and the second line will
-  " silently fail, so the first line will be used. This essentially imitates
-  " the if-else above but doesn't require the +eval feature.
-  silent! set shortmess=filnxtToO
-  silent! set shortmess=filnxtToOC
-silent! endwhile
+set shortmess=filnxtToO
+" The C flag is not available in old Vim/Neovim versions. Instead of trying to
+" figure out the exact versions in which the flag becomes available, I have
+" decided to just try to set it silently. This way it will automatically work
+" on Vim installations without the +eval feature too.
+silent! set shortmess+=C
 
 set commentstring=
 set sidescroll=1
